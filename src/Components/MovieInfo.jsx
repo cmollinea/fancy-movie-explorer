@@ -15,7 +15,7 @@ function MovieInfo() {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `http://www.omdbapi.com/?apikey=d3db93a2&i=${imdbID}`
+          `https://www.omdbapi.com/?apikey=d3db93a2&i=${imdbID}`
         );
         const data = await response.json();
         setMovieInfo(data);
