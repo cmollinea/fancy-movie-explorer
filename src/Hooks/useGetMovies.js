@@ -23,7 +23,7 @@ export function useGetMovies({ title, prevTitle }) {
         dispatch({ type: "FETCH_INIT" });
         try {
           localStorage.setItem("title", title);
-          const response = await fetch(`http://www.omdbapi.com/?&apikey=d3db93a2&type=movie&s=${title}`);
+          const response = await fetch(`https://www.omdbapi.com/?&apikey=d3db93a2&type=movie&s=${title}`);
           const data = await response.json();
           setMoviesResponse(data);
           console.log(data);
