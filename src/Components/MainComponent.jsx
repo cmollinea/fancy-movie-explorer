@@ -9,7 +9,7 @@ function MainComponent() {
   return (
     <>
       <Search query={searchRef} setSearch={setSearch} />
-      <MovieContainer search={search} />
+      <MovieContainer search={search} setSearch={setSearch} />
     </>
   );
 }

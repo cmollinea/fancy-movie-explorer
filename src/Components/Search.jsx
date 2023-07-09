@@ -6,14 +6,14 @@ function Search({ query, setSearch }) {
   const [alert, setAlert] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSearch({ title: query.current.value });
+    setSearch({ title: query.current.value, page: 1 });
     return;
   };
 
   return (
     <main className="mt-4 py-4">
       <form
-        className="flex gap-4 text-slate-50 items-baseline justify-center"
+        className="flex gap-4 text-slate-50 items-baseline font-bold justify-center"
         onSubmit={(e) => handleSubmit(e)}
       >
         <div className="w-fit">

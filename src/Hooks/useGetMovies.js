@@ -2,7 +2,7 @@
 import { useState, useEffect, useReducer } from "react";
 import { getMoviesReducer } from "../services/getMoviesReducer";
 
-export function useGetMovies({ title, prevTitle }) {
+export function useGetMovies({ title, prevTitle, page, prevPage }) {
   const [moviesResponse, setMoviesResponse] = useState(() => {
     const storedResponse = localStorage.getItem("moviesResponse");
     console.log(storedResponse);
@@ -18,15 +18,15 @@ export function useGetMovies({ title, prevTitle }) {
   });
 
   useEffect(() => {
-    if (title !== prevTitle && title) {
+    if ((title !== prevTitle && title) || (title === prevTitle && page !== prevPage && page)) {
       const getMovies = async () => {
         dispatch({ type: "FETCH_INIT" });
         try {
           localStorage.setItem("title", title);
-          const response = await fetch(`https://www.omdbapi.com/?&apikey=d3db93a2&type=movie&s=${title}`);
+          const response = await fetch(`https://www.omdbapi.com/?&apikey=d3db93a2&type=movie&s=${title}&page=${page}`);
           const data = await response.json();
           setMoviesResponse(data);
-          console.log(data);
+          localStorage.setItem('page', page);
           localStorage.setItem("moviesResponse", JSON.stringify(data));
           dispatch({ type: "SUCCESS_FETCH" });
         } catch (error) {
@@ -37,6 +37,6 @@ export function useGetMovies({ title, prevTitle }) {
       getMovies();
       return setMoviesResponse({});
     }
-  }, [title]);
+  }, [title, page]);
   return { getMoviesState, moviesResponse };
 }
